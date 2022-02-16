@@ -2,7 +2,7 @@
 An attempt at creating a jQuery-like library for CS:GO's Vscript API. Is it really useful? Maybe not... You will have to find out.
 
 ## Instructions
-1. Download ***csQuery.nut*** and ***QueryArray.nut*** and place them in `csgo/scripts/vscripts`.
+1. Download ***csQuery.nut*** from the latest stable release and place it in `csgo/scripts/vscripts`.
 
 2. Reference ***csQuery.nut*** in a script. Referencing it multiple time will not impact performance.
    Example: `IncludeScript("csQuery")` (note that if you place it in a folder, the parameter would be `"folder/csQuery"`)
