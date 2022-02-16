@@ -1,5 +1,7 @@
-if ( !("csQuery" in getroottable()) || typeof ::csQuery != "table" )
-    ::csQuery <- {};
+if ("csQuery" in getroottable() && typeof ::csQuery == "table" )
+    return;
+
+::csQuery <- {};
 
 IncludeScript("csgoQuery/QueryArray")
 
