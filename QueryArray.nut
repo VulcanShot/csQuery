@@ -66,11 +66,13 @@ class csQuery.QueryArray {
 
     function Hide() {
         this.SetKeyValue("rendermode", 10);
+        this.SetKeyValue("solid", 0);
         return this;
     }
 
-    function Show(rendermode = 0) {
-        this.SetKeyValue("rendermode", rendermode)
+    function Show(rendermode = 0, collisions = 6) {
+        this.SetKeyValue("rendermode", rendermode);
+        this.SetKeyValue("solid", collisions);
         return this;
     }
 
@@ -112,16 +114,15 @@ class csQuery.QueryArray {
     }
 
     function GetData(key) {
-        local env = { key = key, value = null, returnAll = false }
-        return getData(env)
+        return getData(false, key)
     }
 
     function GetAllData() {
-        local env = { value = null, returnAll = true }
-        return getData(env);
+        return getData(true);
     }
 
-    function getData(env) {
+    function getData(returnAll, key = null) {
+        local env = { key = key, returnAll = returnAll, data = [] }
         this.Each(function (ent) {
             ent.ValidateScriptScope();
             local scope = ent.GetScriptScope();
@@ -129,11 +130,11 @@ class csQuery.QueryArray {
                 throw "Data table has not been created";
 
             if (returnAll == true)
-                value = scope.customData;
+                data.push(scope.customData);
             else 
-                value = scope.customData[key];
+                data.push(scope.customData[key]);
         }.bindenv(env));
-        return env.value;
+        return env.data;
     }
 
     function Length() {
