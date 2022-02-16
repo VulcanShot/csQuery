@@ -102,7 +102,7 @@ class csQuery.QueryArray {
         return this;
     }
     
-    function SetData(key, value) {
+    function SaveData(key, value) {
         this.Each(function (ent) : (key, value) {
             ent.ValidateScriptScope();
             local scope = ent.GetScriptScope();
@@ -143,10 +143,6 @@ class csQuery.QueryArray {
 
     function Get(index) {
         return QueryArray([entArray[index]]);
-    }
-
-    function GetFirst() {
-        return QueryArray([entArray[0]]);
     }
 
     function Eq(index) {
