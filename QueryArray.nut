@@ -64,15 +64,17 @@ class csQuery.QueryArray {
         return this;
     }
 
-    function Hide() {
+    function Hide(removeCollisions = true) {
         this.SetKeyValue("rendermode", 10);
-        this.SetKeyValue("solid", 0);
+        if (removeCollisions == true)
+            this.SetKeyValue("solid", 0);
         return this;
     }
 
     function Show(rendermode = 0, collisions = 6) {
         this.SetKeyValue("rendermode", rendermode);
-        this.SetKeyValue("solid", collisions);
+        if (collisions)
+            this.SetKeyValue("solid", collisions);
         return this;
     }
 
