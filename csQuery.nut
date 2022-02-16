@@ -6,14 +6,14 @@ IncludeScript("csgoQuery/QueryArray")
 csQuery.SELECTOR <- {
     CLASS = 46, // .
     TARGETNAME = 35, // #
-    ALL = 42 // *
+    ALL_OR_FIRST = 42 // *
 }
 
 function csQuery::Find(query) {
-    if (typeof query == "instance") {
+    if (typeof query == "instance")
         return QueryArray([query]);
 
-    if (typeof query != "string" && typeof query != "integer") {
+    if (typeof query != "string" && typeof query != "integer")
         throw "The parameter's data type is invalid (Valid Types: class instance, string, char)"
 
     local _selector = query[0];
@@ -27,7 +27,7 @@ function csQuery::Find(query) {
         case SELECTOR.TARGETNAME:
             output = FindBy(Entities.FindByName, body);
             break;
-        case SELECTOR.ALL:
+        case SELECTOR.ALL_OR_FIRST:
             if (body == "*") {
                 output = First();
                 break;
@@ -60,7 +60,5 @@ function csQuery::Next() {
 }
 
 function csQuery::First() {
-    local ents = [];
-    ents.push(Entities.Next(null));
-    return ents;
+    return [ Entities.Next(null) ];
 }
