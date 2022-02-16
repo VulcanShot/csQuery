@@ -74,7 +74,7 @@ class csQuery.QueryArray {
         return this;
     }
 
-    function EntFire(action, value, delay = 0.0, activator = null, caller = null) {
+    function EntFire(action, value = "", delay = 0.0, activator = null, caller = null) {
         this.Each(function (entity) : (action, value, delay, activator , caller) {
             EntFireByHandle(entity, action, value, delay, activator, caller);
         })
@@ -94,6 +94,8 @@ class csQuery.QueryArray {
     function Off(output, id) {
         this.Each(function (ent) : (output, id) {
             ent.DisconnectOutput( output, id )
+            local scope = ent.GetScriptScope();
+            delete scope[id];
         });
         return this;
     }
