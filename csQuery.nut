@@ -3,7 +3,7 @@ if ("csQuery" in getroottable() && typeof ::csQuery == "table" )
 
 ::csQuery <- {};
 
-IncludeScript("csgoQuery/QueryArray")
+IncludeScript("QueryArray")
 
 csQuery.SELECTOR <- {
     CLASS = 46, // .
@@ -33,7 +33,7 @@ function csQuery::Find(query) {
             if (body == "*") {
                 output = First();
                 break;
-            } 
+            }
             output = Next();
             break;
         default:
