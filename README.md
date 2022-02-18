@@ -41,7 +41,7 @@ QueryArray EachWithIndex(function callback);
 QueryArray SetKeyValue(string key, object value);
 
 // Hides the entities by setting their rendermodes to 10 (Don't render) and, if not asked otherwise, solidity to 0 (Not solid)
-QueryArray Hide(removeCollisions = true);
+QueryArray Hide(bool removeCollisions = true);
 // Shows the entities by setting their rendermodes and collisionmodes to the default/given ones
 QueryArray Show(int rendermode = 0, int collisions = 6);
 
@@ -54,11 +54,13 @@ QueryArray On(string output, function callback, string id);
 QueryArray Off(string output, string id);
 
 // Data functions not recommended when dealing with multiple entities
-// Saves the given value with the given identification (key)
+// Saves the given value with the given identification (key). IMPORTANT: Data saved will 'live' throughout all rounds.
 QueryArray SaveData(string key, object value);
-// Returns an array of objects which match with the given key
+// Returns Whether data under the given key has already been stored. Will not throw an exception if SaveData() has never been used before.
+bool HasData(string key);
+// Returns an array of objects which match with the given key. Will throw an exception if SaveData() has never been used before.
 object[] GetData(string key);
-// Returns an array of tables which contain all data stored through SaveData()
+// Returns an array of tables which contain all data stored through SaveData(). Will throw an exception if SaveData() has never been used before.
 table[] GetAllData();
 
 // Returns the number of entities in the array
