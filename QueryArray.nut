@@ -115,6 +115,20 @@ class csQuery.QueryArray {
         return this;
     }
 
+    function HasData(key) {
+        local env = { key = key, hasData = false }
+        this.Each(function (ent) {
+            ent.ValidateScriptScope();
+            local scope = ent.GetScriptScope();
+            if (!("customData" in scope))
+                return;
+
+            if (key in scope.customData)
+                hasData = true;
+        }.bindenv(env));
+        return env.hasData;
+    }
+
     function GetData(key) {
         return getData(false, key)
     }
