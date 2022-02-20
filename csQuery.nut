@@ -3,7 +3,7 @@ if ("csQuery" in getroottable() && typeof ::csQuery == "table" )
 
 ::csQuery <- {};
 
-IncludeScript("QueryArray")
+IncludeScript("csQuery/QueryArray")
 
 csQuery.SELECTOR <- {
     CLASS = 46, // .
