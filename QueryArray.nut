@@ -153,6 +153,13 @@ class csQuery.QueryArray {
         return env.data;
     }
 
+    function PrecacheModels(models) {
+        foreach(model in models){
+            this.Eq(0).PrecacheModel(model);
+        }
+        return this;
+    }
+
     function Length() {
         return entArray.len();
     }

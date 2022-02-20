@@ -1,17 +1,21 @@
 # csQuery
+
 An attempt at creating a jQuery-like library for CS:GO's Vscript API. Is it really useful? Maybe not... You will have to find out.
 
 ## Instructions
+
 1. Download ***csQuery.nut*** from the latest stable release and place it in `csgo/scripts/vscripts`.
 
 2. Reference ***csQuery.nut*** in a script. Referencing it multiple time will not impact performance.
    Example: `IncludeScript("csQuery")` (note that if you place it in a folder, the parameter would be `"folder/csQuery"`)
-   
+
 3. You can start ~~thinking about how stupid this idea is~~ using csQuery!
 
 ## Getting Started
+
 Just like in the inspiration of this library, in order to do stuff with entities you first need to select these entities.
 There are 3 (or 4) selectors:
+
 - `.`: Classname
 - `#`: Targetname
 - `*`: Everything
@@ -25,6 +29,7 @@ local all = csQuery.Find("*");
 ```
 
 In addition, you can also pass a `CBaseEntity` instance as the argument.
+
 ```squirrel
 local player = csQuery.Find(activator);
 ```
@@ -63,6 +68,9 @@ object[] GetData(string key);
 // Returns an array of tables which contain all data stored through SaveData(). Will throw an exception if SaveData() has never been used before.
 table[] GetAllData();
 
+// Precaches each model in the array. Don't worry, each model is precached only once
+QueryArray PrecacheModels(string[] models);
+
 // Returns the number of entities in the array
 int Length();
 
@@ -77,6 +85,7 @@ CBaseEntity EqFirst();
 ```
 
 ## Examples
+
 ```squirrel
 csQuery.Find(".point_worldtext").SetKeyValue("message", "Hello World");
 
