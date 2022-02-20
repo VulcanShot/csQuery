@@ -24,17 +24,17 @@ function csQuery::Find(query) {
 
     switch (_selector) {
         case SELECTOR.CLASS:
-            output = FindBy(Entities.FindByClassname, body);
+            output = findBy(Entities.FindByClassname, body);
             break;
         case SELECTOR.TARGETNAME:
-            output = FindBy(Entities.FindByName, body);
+            output = findBy(Entities.FindByName, body);
             break;
         case SELECTOR.ALL_OR_FIRST:
             if (body == "*") {
-                output = First();
+                output = first();
                 break;
             }
-            output = Next();
+            output = next();
             break;
         default:
             throw "The parameter has an invalid selector"
@@ -43,7 +43,7 @@ function csQuery::Find(query) {
     return QueryArray(output);
 }
 
-function csQuery::FindBy(findFunction, arg) {
+local findBy = function(findFunction, arg) {
     local ents = [];
     for (local ent; ent = findFunction.call(Entities, ent, arg); )
     {
@@ -52,7 +52,7 @@ function csQuery::FindBy(findFunction, arg) {
     return ents;
 }
 
-function csQuery::Next() {
+local next = function() {
     local ents = [];
     for (local ent; ent = Entities.Next(ent); )
     {
@@ -61,6 +61,6 @@ function csQuery::Next() {
     return ents;
 }
 
-function csQuery::First() {
+local first = function() {
     return [ Entities.Next(null) ];
 }
