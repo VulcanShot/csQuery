@@ -164,8 +164,4 @@ class csQuery.QueryArray {
     function Eq(index) {
         return entArray[index];
     }
-
-    function EqFirst() {
-        return entArray[0];
-    }
 }
