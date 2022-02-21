@@ -58,15 +58,14 @@ QueryArray On(string output, function callback, string id);
 // Stops listening to the given output. The callback removed is the one identified with the id
 QueryArray Off(string output, string id);
 
-// Data functions not recommended when dealing with multiple entities
-// Saves the given value with the given identification (key). IMPORTANT: Data saved will 'live' throughout all rounds.
+// Saves the given value with the given identification (key) in the first entity's scope. IMPORTANT: Data saved will 'live' throughout all rounds.
 QueryArray SaveData(string key, object value);
-// Returns Whether data under the given key has already been stored. Will not throw an exception if SaveData() has never been used before.
+// Returns whether data under the given key has already been stored in the first entity's scope. Will not throw an exception if SaveData() has never been used before.
 bool HasData(string key);
-// Returns an array of objects which match with the given key. Will throw an exception if SaveData() has never been used before.
+// Returns an array of objects which match with the given key in the first entity's scoep. Will throw an exception if SaveData() has not been used with the first entity.
 object[] GetData(string key);
-// Returns an array of tables which contain all data stored through SaveData(). Will throw an exception if SaveData() has never been used before.
-table[] GetAllData();
+// Returns a table which contains all data stored in the first entity's scope through SaveData(string key, object value). Will throw an exception if SaveData() has not been used with the first entity.
+table GetData();
 
 // Precaches each model in the array. Don't worry, each model is precached only once
 QueryArray PrecacheModels(string[] models);

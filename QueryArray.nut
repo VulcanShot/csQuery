@@ -105,52 +105,42 @@ class csQuery.QueryArray {
     }
     
     function SaveData(key, value) {
-        this.Each(function (ent) : (key, value) {
-            ent.ValidateScriptScope();
-            local scope = ent.GetScriptScope();
-            if (!("customData" in scope))
-                scope.customData <- {};
-            scope.customData[key] <- value;
-        });
+        local ent = this.Eq(0);
+        ent.ValidateScriptScope();
+        local scope = ent.GetScriptScope();
+        if (!("customData" in scope))
+            scope.customData <- {};
+        scope.customData[key] <- value;
         return this;
     }
 
     function HasData(key) {
-        local env = { key = key, hasData = false }
-        this.Each(function (ent) {
-            ent.ValidateScriptScope();
-            local scope = ent.GetScriptScope();
-            if (!("customData" in scope))
-                return;
+        local hasData = false;
+        local ent = this.Eq(0);
+        ent.ValidateScriptScope();
+        local scope = ent.GetScriptScope();
 
-            if (key in scope.customData)
-                hasData = true;
-        }.bindenv(env));
-        return env.hasData;
+        if (!("customData" in scope))
+            return;
+
+        if (key in scope.customData)
+            hasData = true;
+
+        return hasData;
     }
 
-    function GetData(key) {
-        return getData(false, key)
-    }
+    function GetData(key = null) {
+        local ent = this.Eq(0);
+        ent.ValidateScriptScope();
+        local scope = ent.GetScriptScope();
 
-    function GetAllData() {
-        return getData(true);
-    }
+        if (!("customData" in scope))
+            throw "Data table has not been created";
 
-    function getData(returnAll, key = null) {
-        local env = { key = key, returnAll = returnAll, data = [] }
-        this.Each(function (ent) {
-            ent.ValidateScriptScope();
-            local scope = ent.GetScriptScope();
-            if (!("customData" in scope))
-                throw "Data table has not been created";
-
-            if (returnAll == true)
-                data.push(scope.customData);
-            else 
-                data.push(scope.customData[key]);
-        }.bindenv(env));
-        return env.data;
+        if (key)
+            return scope.customData[key];
+        else 
+            return scope.customData;
     }
 
     function PrecacheModels(models) {
