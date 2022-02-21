@@ -6,8 +6,8 @@ An attempt at creating a jQuery-like library for CS:GO's Vscript API. Is it real
 
 1. Download ***csQuery.nut*** from the latest stable release and place it in `csgo/scripts/vscripts`.
 
-2. Reference ***csQuery.nut*** in a script. Referencing it multiple time will not impact performance.
-   Example: `IncludeScript("csQuery")` (note that if you place it in a folder, the parameter would be `"folder/csQuery"`)
+2. Reference it in a script. Referencing it multiple time will not impact performance.
+   Example: `IncludeScript("csQuery")`
 
 3. You can start ~~thinking about how stupid this idea is~~ using csQuery!
 
@@ -76,12 +76,8 @@ int Length();
 
 // Returns a QuerryArray with only the entity with the given index
 QueryArray Get(int index);
-// Returns a QuerryArray with only the first entity in the array
-QueryArray GetFirst();
 // Returns the handle of the entity with the given index
 CBaseEntity Eq(int index);
-// Returns the handle of the first entity in the array
-CBaseEntity EqFirst();
 ```
 
 ## Examples
