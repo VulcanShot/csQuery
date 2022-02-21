@@ -11,7 +11,29 @@ csQuery.SELECTOR <- {
     ALL_OR_FIRST = 42 // *
 }
 
-function csQuery::Find(query) {
+local findBy = function(findFunction, arg) {
+    local ents = [];
+    for (local ent; ent = findFunction.call(Entities, ent, arg); )
+    {
+        ents.push(ent);
+    }
+    return ents;
+}
+
+local next = function() {
+    local ents = [];
+    for (local ent; ent = Entities.Next(ent); )
+    {
+        ents.push(ent);
+    }
+    return ents;
+}
+
+local first = function() {
+    return [ Entities.Next(null) ];
+}
+
+function csQuery::Find(query) : (findBy, next, first) {
     if (typeof query == "instance")
         return QueryArray([query]);
 
@@ -41,26 +63,4 @@ function csQuery::Find(query) {
     }
 
     return QueryArray(output);
-}
-
-local findBy = function(findFunction, arg) {
-    local ents = [];
-    for (local ent; ent = findFunction.call(Entities, ent, arg); )
-    {
-        ents.push(ent);
-    }
-    return ents;
-}
-
-local next = function() {
-    local ents = [];
-    for (local ent; ent = Entities.Next(ent); )
-    {
-        ents.push(ent);
-    }
-    return ents;
-}
-
-local first = function() {
-    return [ Entities.Next(null) ];
 }
