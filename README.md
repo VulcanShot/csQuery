@@ -67,6 +67,9 @@ object[] GetData(string key);
 // Returns a table which contains all data stored in the first entity's scope through SaveData(string key, object value). Will throw an exception if SaveData() has not been used with the first entity.
 table GetData();
 
+// The passed function is used as a test for each entity in the array. `this` (environment object) is the current entity.
+QueryArray Filter(function fltr);
+
 // Precaches each model in the array. Don't worry, each model is precached only once
 QueryArray PrecacheModels(string[] models);
 
@@ -75,7 +78,7 @@ int Length();
 
 // Returns a QuerryArray with only the entity with the given index
 QueryArray Get(int index);
-// Returns the handle of the entity with the given index
+// Returns the CBaseEntity handle of the entity with the given index
 CBaseEntity Eq(int index);
 ```
 

@@ -143,6 +143,15 @@ class csQuery.QueryArray {
             return scope.customData;
     }
 
+    function Filter(fltr) {
+        local approvedEntities = [];
+        this.Each(function (ent) : (fltr, approvedEntities) {
+            if ( fltr.call(ent) )
+                approvedEntities.push(ent);
+        });
+        return csQuery.QueryArray(approvedEntities);
+    }
+
     function PrecacheModels(models) {
         foreach(model in models){
             this.Eq(0).PrecacheModel(model);
@@ -155,7 +164,7 @@ class csQuery.QueryArray {
     }
 
     function Get(index) {
-        return QueryArray([entArray[index]]);
+        return csQuery.QueryArray([entArray[index]]);
     }
 
     function Eq(index) {
