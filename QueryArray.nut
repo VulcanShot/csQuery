@@ -85,10 +85,14 @@ class csQuery.QueryArray {
         return this;
     }
 
-    function On(output, callback, id) {
-        this.Each(function (ent) : (output, callback, id) {
+    function On(output, callback, id = null) {
+        this.Each(function(ent) : (output, callback, id) {
             ent.ValidateScriptScope();
             local scope = ent.GetScriptScope();
+
+            if (id == null)
+                id = UniqueString("OutputID_");
+
             scope[id] <- callback;
             ent.ConnectOutput( output, id );
         })
@@ -105,7 +109,7 @@ class csQuery.QueryArray {
     }
     
     function SaveData(key, value) {
-        local ent = this.Eq(0);
+        local ent = this.Get(0);
         ent.ValidateScriptScope();
         local scope = ent.GetScriptScope();
         if (!("customData" in scope))
@@ -116,7 +120,7 @@ class csQuery.QueryArray {
 
     function HasData(key) {
         local hasData = false;
-        local ent = this.Eq(0);
+        local ent = this.Get(0);
         ent.ValidateScriptScope();
         local scope = ent.GetScriptScope();
 
@@ -130,7 +134,7 @@ class csQuery.QueryArray {
     }
 
     function GetData(key = null) {
-        local ent = this.Eq(0);
+        local ent = this.Get(0);
         ent.ValidateScriptScope();
         local scope = ent.GetScriptScope();
 
@@ -154,7 +158,7 @@ class csQuery.QueryArray {
 
     function PrecacheModels(models) {
         foreach(model in models){
-            this.Eq(0).PrecacheModel(model);
+            this.Get(0).PrecacheModel(model);
         }
         return this;
     }
@@ -163,11 +167,15 @@ class csQuery.QueryArray {
         return entArray.len();
     }
 
-    function Get(index) {
+    function Eq(index) {
         return csQuery.QueryArray([entArray[index]]);
     }
 
-    function Eq(index) {
+    function First() {
+        return csQuery.QueryArray([entArray[0]]);
+    }
+
+    function Get(index) {
         return entArray[index];
     }
 }
