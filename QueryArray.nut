@@ -89,12 +89,13 @@ class csQuery.QueryArray {
         this.Each(function(ent) : (output, callback, id) {
             ent.ValidateScriptScope();
             local scope = ent.GetScriptScope();
+            local _id = id; // Free variables are read-only
 
-            if (id == null)
-                id = UniqueString("OutputID_");
+            if (_id == null)
+                _id = UniqueString("OutputID_");
 
-            scope[id] <- callback;
-            ent.ConnectOutput( output, id );
+            scope[_id] <- callback;
+            ent.ConnectOutput( output, _id );
         })
         return this;
     }
