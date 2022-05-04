@@ -76,10 +76,12 @@ QueryArray PrecacheModels(string[] models);
 // Returns the number of entities in the array
 int Length();
 
-// Returns a QuerryArray with only the entity with the given index
-QueryArray Get(int index);
 // Returns the CBaseEntity handle of the entity with the given index
+QueryArray Get(int index);
+// Returns a QuerryArray with only the entity with the given index
 CBaseEntity Eq(int index);
+// Returns a QuerryArray with only the first entity (typically worldspawn)
+CBaseEntity First();
 ```
 
 ## Examples
