@@ -3,7 +3,7 @@ if ("csQuery" in getroottable() && typeof ::csQuery == "table" )
 
 ::csQuery <- {};
 
-IncludeScript("csQuery/QueryArray")
+IncludeScript("csQuery/QueryArray");
 
 csQuery.SELECTOR <- {
     CLASS = 46, // .
@@ -32,15 +32,15 @@ local all = function() {
 
 function csQuery::Find(query) : (findBy, all) {
     if (typeof query == "instance")
-        return QueryArray([query]);
+        return QueryArray( query );
 
     if (typeof query != "string" && typeof query != "integer")
         throw "The parameter's data type is invalid (Valid Types: class instance, string, char)";
 
-    local _selector = query[0];
+    local selector = query[0];
     local body = query.slice(1);
 
-    switch (_selector) {
+    switch (selector) {
         case SELECTOR.CLASS:
             return QueryArray( findBy(Entities.FindByClassname, body) );
         case SELECTOR.TARGETNAME:
