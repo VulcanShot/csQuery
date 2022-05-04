@@ -8,7 +8,8 @@ IncludeScript("csQuery/QueryArray")
 csQuery.SELECTOR <- {
     CLASS = 46, // .
     TARGETNAME = 35, // #
-    ALL_OR_FIRST = 42 // *
+    ALL = 42, // *
+    FIRST = 33 // !
 }
 
 local findBy = function(findFunction, arg) {
@@ -20,7 +21,7 @@ local findBy = function(findFunction, arg) {
     return ents;
 }
 
-local next = function() {
+local all = function() {
     local ents = [];
     for (local ent; ent = Entities.Next(ent); )
     {
@@ -29,11 +30,7 @@ local next = function() {
     return ents;
 }
 
-local first = function() {
-    return [ Entities.Next(null) ];
-}
-
-function csQuery::Find(query) : (findBy, next, first) {
+function csQuery::Find(query) : (findBy, all) {
     if (typeof query == "instance")
         return QueryArray([query]);
 
@@ -42,25 +39,17 @@ function csQuery::Find(query) : (findBy, next, first) {
 
     local _selector = query[0];
     local body = query.slice(1);
-    local output;
 
     switch (_selector) {
         case SELECTOR.CLASS:
-            output = findBy(Entities.FindByClassname, body);
-            break;
+            return QueryArray( findBy(Entities.FindByClassname, body) );
         case SELECTOR.TARGETNAME:
-            output = findBy(Entities.FindByName, body);
-            break;
-        case SELECTOR.ALL_OR_FIRST:
-            if (body == "*") {
-                output = first();
-                break;
-            }
-            output = next();
-            break;
+            return QueryArray( findBy(Entities.FindByName, body) );
+        case SELECTOR.ALL:
+            return QueryArray( all() );
+        case SELECTOR.FIRST:
+            return QueryArray( [ Entities.Next(null) ] );
         default:
             throw "The parameter has an invalid selector"
     }
-
-    return QueryArray(output);
 }
