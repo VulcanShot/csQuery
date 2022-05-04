@@ -73,7 +73,8 @@ table GetData();
 // The passed function is used as a test for each entity in the array. `this` (environment object) is the current entity.
 QueryArray Filter(function fltr);
 
-// Precaches each model in the array. Don't worry, each model is precached only once.
+// Precaches each model in the array. 
+// NOTE: Models are only precached once regardless of the length of the array.
 QueryArray PrecacheModels(string[] models);
 
 // Returns the number of entities in the array.
@@ -83,7 +84,7 @@ int Length();
 QueryArray Get(int index);
 // Returns a QuerryArray with only the entity with the given index.
 CBaseEntity Eq(int index);
-// Returns a QuerryArray with only the first entity (typically worldspawn).
+// Returns a QuerryArray with only the first entity in the QuerryArray.
 CBaseEntity First();
 ```
 
