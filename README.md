@@ -24,8 +24,8 @@ There are 4 selectors:
 ```squirrel
 local texts = csQuery.Find(".point_worldtext");
 local text_1 = csQuery.Find("#text_1");
-local all = csQuery.Find("*");
-local first = csQuery.Find("!");
+local all = csQuery.Find('*');
+local first = csQuery.Find('!');
 ```
 
 In addition, you can also pass a `CBaseEntity` instance as the argument.
