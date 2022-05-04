@@ -60,7 +60,7 @@ QueryArray Off(string output, string id);
 
 // Saves the given value with the given identification (key) in the first entity's scope. IMPORTANT: Data saved will 'live' throughout all rounds.
 QueryArray SaveData(string key, object value);
-// Returns whether data under the given key has already been stored in the first entity's scope. Will not throw an exception if SaveData() has never been used before.
+// Returns whether data under the given key has already been stored in the first entity's scope.
 bool HasData(string key);
 // Returns an array of objects which match with the given key in the first entity's scoep. Will throw an exception if SaveData() has not been used with the first entity.
 object[] GetData(string key);

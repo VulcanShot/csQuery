@@ -130,18 +130,14 @@ class csQuery.QueryArray {
     }
 
     function HasData(key) {
-        local hasData = false;
         local ent = this.Get(0);
         ent.ValidateScriptScope();
         local scope = ent.GetScriptScope();
 
-        if (!("customData" in scope))
-            return;
+        if ("customData" in scope && key in scope.customData)
+            return true;
 
-        if (key in scope.customData)
-            hasData = true;
-
-        return hasData;
+        return false;
     }
 
     function GetData(key = null) {
