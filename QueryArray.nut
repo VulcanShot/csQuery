@@ -2,22 +2,32 @@ if ( !("csQuery" in getroottable()) || typeof ::csQuery != "table" )
     throw "csQuery not found. Make sure you are not directly referencing this script, instead reference csQuery.nut";
 
 class csQuery.QueryArray {
-    constructor(_entArray){
-        entArray = _entArray;
+    constructor(_entArray) {
+        if (typeof _entArray == "array") {
+            entArray = _entArray;
+            return;
+        }
+            
+        if (typeof _entArray == "instance") {
+            entArray = [ _entArray ];
+            return;
+        }
+            
+        throw "The parameter's data type is invalid (Valid Types: array, class instance)";
     }
 
     entArray = null;
 
     function Each(callback) {
         foreach (ent in entArray) {
-            callback.call(this, ent)
+            callback.call(this, ent);
         }
         return this;
     }
 
     function EachWithIndex(callback) {
         for (local i = 0; i < entArray.len(); i++) {
-            callback.call(this, i, entArray[i])
+            callback.call(this, i, entArray[i]);
         }
         return this;
     }
@@ -169,11 +179,11 @@ class csQuery.QueryArray {
     }
 
     function Eq(index) {
-        return csQuery.QueryArray([entArray[index]]);
+        return csQuery.QueryArray(entArray[index]);
     }
 
     function First() {
-        return csQuery.QueryArray([entArray[0]]);
+        return csQuery.QueryArray(entArray[0]);
     }
 
     function Get(index) {

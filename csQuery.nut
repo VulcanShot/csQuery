@@ -35,7 +35,7 @@ function csQuery::Find(query) : (findBy, all) {
         return QueryArray([query]);
 
     if (typeof query != "string" && typeof query != "integer")
-        throw "The parameter's data type is invalid (Valid Types: class instance, string, char)"
+        throw "The parameter's data type is invalid (Valid Types: class instance, string, char)";
 
     local _selector = query[0];
     local body = query.slice(1);
@@ -48,8 +48,8 @@ function csQuery::Find(query) : (findBy, all) {
         case SELECTOR.ALL:
             return QueryArray( all() );
         case SELECTOR.FIRST:
-            return QueryArray( [ Entities.Next(null) ] );
+            return QueryArray( Entities.Next(null) );
         default:
-            throw "The parameter has an invalid selector"
+            throw "The parameter has an invalid selector";
     }
 }
