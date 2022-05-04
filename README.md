@@ -58,13 +58,16 @@ QueryArray On(string output, function callback, string id);
 // Stops listening to the given output. The callback removed is the one identified with the id
 QueryArray Off(string output, string id);
 
-// Saves the given value with the given identification (key) in the first entity's scope. IMPORTANT: Data saved will 'live' throughout all rounds.
+// Saves the given value under the given key in the first entity's scope. 
+// NOTE: Data saved will be stored throughout the entire match.
 QueryArray SaveData(string key, object value);
 // Returns whether data under the given key has already been stored in the first entity's scope.
 bool HasData(string key);
-// Returns an array of objects which match with the given key in the first entity's scoep. Will throw an exception if SaveData() has not been used with the first entity.
-object[] GetData(string key);
-// Returns a table which contains all data stored in the first entity's scope through SaveData(string key, object value). Will throw an exception if SaveData() has not been used with the first entity.
+// Returns the value under the given key in the first entity's scope. 
+// NOTE: Will throw an exception if SaveData() has not been used at all.
+object GetData(string key);
+// Returns a table which contains all data stored in the first entity's scope through SaveData().
+// NOTE: Will throw an exception if SaveData() has not been used at all.
 table GetData();
 
 // The passed function is used as a test for each entity in the array. `this` (environment object) is the current entity.
