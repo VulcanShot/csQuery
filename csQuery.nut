@@ -16,7 +16,7 @@ local findBy = function(findFunction, arg) {
     local ents = [];
     for (local ent; ent = findFunction.call(Entities, ent, arg); )
     {
-        ents.push(ent);
+        ents.push(ent.weakref());
     }
     return ents;
 }
@@ -25,7 +25,7 @@ local all = function() {
     local ents = [];
     for (local ent; ent = Entities.Next(ent); )
     {
-        ents.push(ent);
+        ents.push(ent.weakref());
     }
     return ents;
 }
@@ -48,7 +48,7 @@ function csQuery::Find(query) : (findBy, all) {
         case SELECTOR.ALL:
             return QueryArray( all() );
         case SELECTOR.FIRST:
-            return QueryArray( Entities.Next(null) );
+            return QueryArray( Entities.Next(null).weakref() );
         default:
             throw "The parameter has an invalid selector";
     }

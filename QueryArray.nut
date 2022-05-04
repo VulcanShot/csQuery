@@ -8,12 +8,12 @@ class csQuery.QueryArray {
             return;
         }
             
-        if (typeof _entArray == "instance") {
+        if (typeof _entArray == "weakref") {
             entArray = [ _entArray ];
             return;
         }
             
-        throw "The parameter's data type is invalid (Valid Types: array, class instance)";
+        throw "The parameter's data type is invalid (Valid Types: array, weak reference)";
     }
 
     entArray = null;
