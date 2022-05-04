@@ -42,12 +42,12 @@ QueryArray Each(function callback);
 // Calls the callback for every entity. The callback will be pased the CBaseEntity and the index of it in the array as an argument.
 QueryArray EachWithIndex(function callback);
 
-// Set the given KeyValue to the given Value
+// Set the given KeyValue.
 QueryArray SetKeyValue(string key, object value);
 
-// Hides the entities by setting their rendermodes to 10 (Don't render) and, if not asked otherwise, solidity to 0 (Not solid)
+// Hides the entities by setting their rendermodes to 10 (Don't render) and, if not asked otherwise, solidity to 0 (Not solid).
 QueryArray Hide(bool removeCollisions = true);
-// Shows the entities by setting their rendermodes and collisionmodes to the default/given ones
+// Shows the entities by setting their rendermodes and collisionmodes to the default/given ones.
 QueryArray Show(int rendermode = 0, int collisions = 6);
 
 // Fires the given input (action) of the entities passing several optional parameters if given.
@@ -55,7 +55,7 @@ QueryArray EntFire(string action, string value = "", float delay = 0.0, CBaseEnt
 
 // Starts listening for the given output. In case it fires, the callback is called. The id is used to stop listening.
 QueryArray On(string output, function callback, string id);
-// Stops listening to the given output. The callback removed is the one identified with the id
+// Stops listening to the given output. The callback removed is the one identified with the id.
 QueryArray Off(string output, string id);
 
 // Saves the given value under the given key in the first entity's scope. 
@@ -73,17 +73,17 @@ table GetData();
 // The passed function is used as a test for each entity in the array. `this` (environment object) is the current entity.
 QueryArray Filter(function fltr);
 
-// Precaches each model in the array. Don't worry, each model is precached only once
+// Precaches each model in the array. Don't worry, each model is precached only once.
 QueryArray PrecacheModels(string[] models);
 
-// Returns the number of entities in the array
+// Returns the number of entities in the array.
 int Length();
 
-// Returns the CBaseEntity handle of the entity with the given index
+// Returns the CBaseEntity handle of the entity with the given index.
 QueryArray Get(int index);
-// Returns a QuerryArray with only the entity with the given index
+// Returns a QuerryArray with only the entity with the given index.
 CBaseEntity Eq(int index);
-// Returns a QuerryArray with only the first entity (typically worldspawn)
+// Returns a QuerryArray with only the first entity (typically worldspawn).
 CBaseEntity First();
 ```
 
