@@ -33,44 +33,30 @@ class csQuery.QueryArray {
     }
 
     function SetKeyValue(key, value) {
-        // Credits to samisalreadytaken @ https://github.com/samisalreadytaken/vs_library/blob/4729726bb4506d6d93db913633cbdec6a4d07ac8/src/vs_entity.nut#L281
-        switch (typeof value)
-        {
-            case "bool":
-            case "integer":
-                this.Each(function(ent) : (key, value)
-                {
+        this.Each(function (ent) : (key, value) {
+            switch (typeof value)
+            {
+                case "bool":
+                case "integer":
                     ent.__KeyValueFromInt( key, value.tointeger() );
-                });
-                break;
+                    break;
 
-            case "float":
-                this.Each(function(ent) : (key, value)
-                {
+                case "float":
                     ent.__KeyValueFromFloat( key, value );
-                });
-                break;
+                    break;
 
-            case "string":
-                this.Each(function(ent) : (key, value)
-                {
+                case "string":
                     ent.__KeyValueFromString( key, value );
-                });
-                break;
+                    break;
 
-            case "Vector":
-                this.Each(function(ent) : (key, value)
-                {
+                case "Vector":
                     ent.__KeyValueFromVector( key, value );
-                });
-                break;
+                    break;
 
-            case "null":
-                break;
-
-            default:
-                throw "Invalid input type: " + typeof value;
-        }
+                default:
+                    throw "Invalid input type: " + typeof value;
+            }
+        });
         return this;
     }
 
