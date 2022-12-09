@@ -14,18 +14,16 @@ An attempt at creating a jQuery-like library for CS:GO's Vscript API. Is it real
 ## Getting Started
 
 Just like in the inspiration of this library, in order to do stuff with entities you first need to select these entities.
-There are 4 selectors:
+There are 3 selectors:
 
 - `.`: Classname
 - `#`: Targetname
 - `*`: Everything
-- `!`: First
 
 ```squirrel
 local texts = csQuery.Find(".point_worldtext");
 local text_1 = csQuery.Find("#text_1");
 local all = csQuery.Find('*');
-local first = csQuery.Find('!');
 ```
 
 In addition, you can also pass a `CBaseEntity` instance as the argument.

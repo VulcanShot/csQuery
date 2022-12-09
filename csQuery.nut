@@ -9,12 +9,11 @@ csQuery.SELECTOR <- {
     CLASS = 46, // .
     TARGETNAME = 35, // #
     ALL = 42, // *
-    FIRST = 33 // !
 }
 
 local findBy = function(findFunction, arg) {
     local ents = [];
-    for (local ent; ent = findFunction.call(Entities, ent, arg); )
+    for ( local ent; ent = findFunction.call(Entities, ent, arg); )
     {
         ents.push(ent.weakref());
     }
@@ -23,7 +22,7 @@ local findBy = function(findFunction, arg) {
 
 local all = function() {
     local ents = [];
-    for (local ent; ent = Entities.Next(ent); )
+    for ( local ent; ent = Entities.Next(ent); )
     {
         ents.push(ent.weakref());
     }
@@ -47,8 +46,6 @@ function csQuery::Find(query) : (findBy, all) {
             return QueryArray( findBy(Entities.FindByName, body) );
         case SELECTOR.ALL:
             return QueryArray( all() );
-        case SELECTOR.FIRST:
-            return QueryArray( Entities.Next(null).weakref() );
         default:
             throw "The parameter has an invalid selector";
     }
